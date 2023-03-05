@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+    <property name="now" value="now()" dbms="postgresql"/>
+    <changeSet author="liquibase-docs" id="states-metadata">
+        <loadData catalogName="cat"
+                  commentLineStartsWith="/"
+                  encoding="UTF-8"
+                  file="db/CSV/states.csv"
+                  quotchar="'"
+                  relativeToChangelogFile="false"
+                  schemaName="public"
+                  separator=","
+                  tableName="states"
+                  usePreparedStatements="true">
+            <column header="state_code"
+                    name="code"
+                    type="NUMERIC"/>
+            <column header="state_name"
+                    name="name"
+                    type="STRING"/>
+            <column header="type"
+                    name="type"
+                    type="STRING"/>
+        </loadData>
+    </changeSet>
+    <changeSet author="liquibase-docs" id="districts-metadata">
+        <loadData catalogName="cat"
+                  commentLineStartsWith="//"
+                  encoding="UTF-8"
+                  file="db/CSV/districts.csv"
+                  quotchar="'"
+                  relativeToChangelogFile="false"
+                  schemaName="public"
+                  separator=","
+                  tableName="districts"
+                  usePreparedStatements="true">
+            <column header="district_code"
+                    name="code"
+                    type="NUMERIC"/>
+            <column header="district_name"
+                    name="name"
+                    type="STRING"/>
+            <column header="state_code"
+                    name="state_code"
+                    type="NUMERIC"/>
+            <column header="short_name"
+                    name="short_name"
+                    type="STRING"/>
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

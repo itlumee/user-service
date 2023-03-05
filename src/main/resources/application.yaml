@@ -1,0 +1,45 @@
+server:
+  shutdown: graceful
+  port: 8080
+
+
+db:
+  itlume:
+    host: localhost
+    user: postgres
+    name: itlume
+    password: postgres
+
+
+spring:
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate.format_sql: true
+      hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    name: itlume_ds
+    url: jdbc:postgresql://${db.itlume.host}:5432/${db.itlume.name}
+    username: ${db.itlume.user}
+    password: ${db.itlume.password}
+    hikari:
+      max-lifetime: 3600000
+      idle-timeout: 300000
+      maximum-pool-size: 30
+      minimum-idle: 4
+      pool-name: itlume_db
+      data-source-properties:
+        prepStmtCacheSqlLimit: 2048
+        useServerPrepStmts: true
+        prepStmtCacheSize: 250
+        cachePrepStmts: true
+
+  liquibase:
+    enabled: true
+    url: jdbc:postgresql://${db.itlume.host}:5432/${db.itlume.name}
+    user: ${db.itlume.user}
+    password: ${db.itlume.password}
+    change-log: classpath:db/changelog.xml
